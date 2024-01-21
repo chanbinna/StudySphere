@@ -1,0 +1,40 @@
+.main {
+    text-align: center;
+
+}
+
+.mainText {
+    margin-top: 12vh;
+    font-size: 25px;
+
+}
+
+
+.logo2 {
+    margin-top: 20px;
+    height: 26vmin;
+
+
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .logo2 {
+        animation: App-logo-spin infinite 30s linear;
+    }
+}
+
+
+
+.subText {
+    margin-top: 50px;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
