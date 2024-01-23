@@ -1,3 +1,4 @@
+import Logo from '../Logo1.svg';
 import Logo2 from '../Logo2.svg';
 import React from 'react'
 import './Home.css';
@@ -8,7 +9,12 @@ import { Footer } from '../components/Footer';
 export const Home = () => {
     return (
         <div>
-            <NavBar />
+            <div className='navbar'>
+                <img className='logo' src={Logo} alt="" />
+
+                <a className='login' href="login">Log in</a>
+            </div>
+
             <div className='main'>
                 <div className='mainText'>
                     <h1>Welcome to <br /> STUDYSPHERE</h1>
