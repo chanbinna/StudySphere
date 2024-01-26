@@ -13,14 +13,19 @@
     margin-left: 13px;
 }
 
-.login {
+.buttons>a {
+    height: 40px;
+}
+
+
+/* .buttons {
     margin-left: auto;
     margin-right: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 13px;
-    height: 30px;
+    height: 40px;
     width: 100px;
     border: 0.16rem solid;
     border-radius: 10px;
@@ -31,8 +36,4 @@
     color: black;
     text-decoration: none;
 
-}
-
-.login:hover {
-    background-color: #d7d6d6;
-}
+} */

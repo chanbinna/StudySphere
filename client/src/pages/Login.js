@@ -24,7 +24,7 @@ export const Login = () => {
     return (
         <div>
             <div className='navbar'>
-                <img className='logo' src={Logo} alt="" />
+                <a href='/'><img className='logo' src={Logo} alt="" /></a>
 
                 <a className='button' href="/"> <SlArrowLeft /> &nbsp; Back to main page</a>
             </div>
