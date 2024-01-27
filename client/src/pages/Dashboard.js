@@ -6,6 +6,7 @@ import {
     VictoryBar, VictoryChart, VictoryAxis,
     VictoryTheme
 } from 'victory';
+import { SlPlus } from "react-icons/sl";
 
 
 export const Dashboard = () => {
@@ -51,6 +52,7 @@ export const Dashboard = () => {
             </div>
             <div className='myGroup'>
                 <h2>My Groups</h2>
+                <button className='addGroup'><SlPlus /></button>
 
             </div>
             <div className='stat'>

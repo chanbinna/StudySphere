@@ -87,6 +87,7 @@
     box-sizing: border-box;
     height: 55vh;
     border: 1px solid black;
+    position: relative;
 }
 
 .myGroup>h2 {
@@ -118,4 +119,18 @@
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: 25px;
+}
+
+.addGroup {
+    background-color: white;
+    border: none;
+    font-size: larger;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
+
+.addGroup:hover {
+    color: rgb(97, 175, 183);
+
 }
