@@ -19,7 +19,22 @@ module.exports = (sequelize, DataTypes) => {
         leader: {
             type: DataTypes.STRING,
             allowNull: true,
-        }
-    })
+        },
+        // public: {
+        //     type: DataTypes.BOOLEAN,
+        //     allowNull: false
+        // },
+        // notificationSetting: {
+        //     type: DataTypes.ENUM('Week', 'Day', 'Hour'),
+        //     defaultValue: 'Day'
+        // }
+    });
+
+    Groups.associate = (models) => {
+        Groups.hasMany(models.Chats, {
+            onDelete: 'cascade',
+        });
+    };
+    
     return Groups;
-}
+};
