@@ -11,6 +11,8 @@ export const NavBar = () => {
             <img className='logo' src={Logo} alt="" />
 
             <div className='buttons'>
+                <button className='logout-button'>LOGOUT</button>
+
                 <a href="/dashboard"><SlHome /></a>
                 <a href="/findgroup"><SlCompass /></a>
                 <a href="/chat"><SlBubbles /></a>
