@@ -11,6 +11,14 @@ module.exports = (sequelize, DataTypes) => {
         email: {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        gradeLevel: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        gender: {
+            type: DataTypes.STRING,
+            allowNull: false,
         }
     });
     // Users.associate = (models) => {
