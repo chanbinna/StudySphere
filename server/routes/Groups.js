@@ -18,4 +18,14 @@ router.get('/byID/:id', async (req, res) => {
     res.json(group);
 });
 
+router.delete('/byID/:id', async (req, res) => {
+    const groupId = req.params.id;
+    Groups.destroy({
+        where: {
+            id: groupId
+        }
+    });
+    res.json(`${groupId} deleted from the database`);
+});
+
 module.exports = router;
