@@ -11,18 +11,21 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     //const user = req.body;
-    const { username, password, email, gender, gradeLevel } = req.body;
-    bcrypt.hash(password, 10).then((hash)=>{
-        Users.create({
-            username: username,
-            password: hash,
-            email: email,
-            gradeLevel: gradeLevel,
-            gender: gender
-        });
-    })
-    //await Users.create(user);
-    res.json(username);
+    const { name, email} = req.body;
+    // bcrypt.hash(password, 10).then((hash)=>{
+    //     Users.create({
+    //         username: username,
+    //         password: hash,
+    //         email: email,
+    //         gradeLevel: gradeLevel,
+    //         gender: gender
+    //     });
+    // })
+    Users.create({
+        name: name,
+        email: email
+    });
+    res.json(name);
 });
 
 router.get('/:id', async (req, res) => {
