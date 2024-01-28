@@ -55,7 +55,18 @@
 
 .logbutton {
     display: flex;
-    margin-top: 100px;
+    margin-top: 170px;
     align-items: center;
     justify-content: center;
+}
+
+.googleLogin {
+    width: 300px;
+    height: 46px;
+    font-size: 20px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    border-radius: 25px;
+    font-weight: 550;
+
 }
