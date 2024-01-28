@@ -4,14 +4,22 @@ import './NavBar.css';
 import { SlHome } from "react-icons/sl";
 import { SlCompass } from "react-icons/sl";
 import { SlBubbles } from "react-icons/sl";
+import { googleLogout} from '@react-oauth/google';
+import { useNavigate } from 'react-router-dom';
 
 export const NavBar = () => {
+    const navigate = useNavigate();
+    const logOut = () => {
+        googleLogout();
+        navigate('/');
+        //setProfile(null);
+    };
     return (
         <div className='navbar'>
             <img className='logo' src={Logo} alt="" />
 
             <div className='buttons'>
-                <button className='logout-button'>LOGOUT</button>
+                <button className='logout-button' onClick={logOut}>Log Out</button>
 
                 <a href="/dashboard"><SlHome /></a>
                 <a href="/findgroup"><SlCompass /></a>
