@@ -11,9 +11,9 @@ import { VideoCall } from './pages/VideoCall';
 import { Dashboard } from './pages/Dashboard';
 
 
-
 export const App = () => {
   return (
+    
     <BrowserRouter>
       <Routes>
         <Route index element={<Home />} />
