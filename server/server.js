@@ -9,12 +9,10 @@ const db = require('./models');
 const groupRouter = require('./routes/Groups');
 const chatRouter = require('./routes/Chats');
 const userRouter = require('./routes/Users');
-const groupUserRouter = require('./routes/GroupsUsers');
 
 app.use('/groups', groupRouter);
 app.use('/chats', chatRouter);
 app.use('/users', userRouter);
-app.use('/groupsUsers', groupUserRouter);
 
 app.get('/', (req, res) => {
     res.send("Main page");
