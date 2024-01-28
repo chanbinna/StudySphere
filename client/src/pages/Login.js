@@ -50,7 +50,7 @@ export const Login = () => {
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => {
             setUser(codeResponse);
-            navigate('/dashboard');
+            //navigate('/dashboard');
         },
         onError: (error) => console.log('Login Failed:', error)
     });
@@ -68,6 +68,11 @@ export const Login = () => {
                     .then((res) => {
                         setProfile(res.data);
                         sendToServer(res.data);
+                        navigate('/dashboard', { state: { 
+                            name: res.data.name, 
+                            email: res.data.email,
+                            picture: res.data.picture
+                        } });
                     })
                     .catch((err) => console.log(err));
             }

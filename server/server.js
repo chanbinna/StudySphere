@@ -20,6 +20,13 @@ app.get('/', (req, res) => {
     res.send("Main page");
 });
 
+// const Users = sequelize.import('./models/Users');
+// const Groups = sequelize.import('./models/Groups');
+// const UserGroup = sequelize.import('./models/UserGroup');
+
+db.Users.belongsToMany(db.Groups, { through: db.UserGroup });
+db.Groups.belongsToMany(db.Users, { through: db.UserGroup });
+
 
 db.sequelize.sync().then(() => {
     app.listen(3001, ()=> {

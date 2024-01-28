@@ -2,6 +2,9 @@ import React from 'react';
 import { NavBar } from '../components/NavBar';
 import './Dashboard.css'
 import { SlPencil } from "react-icons/sl";
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import {
     VictoryBar, VictoryChart, VictoryAxis,
     VictoryTheme
@@ -10,6 +13,16 @@ import { SlPlus } from "react-icons/sl";
 
 
 export const Dashboard = () => {
+    const [ groups, setGroups ] = useState([]);
+    const location = useLocation();
+    const { name, email, picture } = location.state || {};
+    const userName = 'jihun1';
+    useEffect(() => {
+        axios.get(`http://localhost:3001/groups/byLeader/${userName}`).then((res) => {
+            setGroups(res.data);
+        })
+    }, []);
+
     const data = [
         { weekday: 1, hours: 6 },
         { weekday: 2, hours: 2 },
@@ -28,18 +41,18 @@ export const Dashboard = () => {
 
             </div>
             <div className='profile'>
-                <h1>Hello (Username) 👋</h1>
+                <h1>Hello {name} 👋</h1>
                 <div className='profileItem'>
                     <div className='profilePic'>
-                        <img src="../ProfileDefault.png" alt="" />
+                        <img src={picture} alt="user image" />
                     </div>
                     <div className='profileText'>
                         <h3>
-                            ID:<br />
                             Name:<br />
+                            {name}<br />
+                            <br />
                             Email:<br />
-                            Grade Level:<br />
-                            Gender: <br />
+                            {email}<br />
                         </h3>
                     </div>
                 </div>
@@ -53,7 +66,19 @@ export const Dashboard = () => {
             <div className='myGroup'>
                 <h2>My Groups</h2>
                 <button className='addGroup'><SlPlus /></button>
-
+                {groups.map((group, key) => {
+                return (
+                    <div className = 'temp'  key={group.id}>
+                        <h3 className = 'temp' >{group.groupName}</h3>
+                        <div className = 'temp' >
+                            <p className = 'temp' >Major: {group.major}</p>
+                            <p className = 'temp' >Subject: {group.subject}</p>
+                            <p className = 'temp' >Grade Level: {group.gradeLevel}</p>
+                            <p className = 'temp' >Leader: {group.leader}</p>
+                        </div>
+                    </div>
+                );
+                })}
             </div>
             <div className='stat'>
                 <h2>Study Statistics</h2>

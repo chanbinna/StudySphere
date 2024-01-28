@@ -28,4 +28,14 @@ router.delete('/byID/:id', async (req, res) => {
     res.json(`${groupId} deleted from the database`);
 });
 
+router.get('/byLeader/:name', async (req, res) => {
+    const name = req.params.name;
+    const groups = await Groups.findAll({
+        where: {
+            leader: name  // Assuming 'leader' is the field for the leader's name
+        }
+    });
+    res.json(groups);
+});
+
 module.exports = router;
