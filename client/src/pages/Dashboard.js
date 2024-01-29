@@ -1,34 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavBar } from '../components/NavBar';
-import './Dashboard.css'
+import './Dashboard.css';
 import { SlPencil } from "react-icons/sl";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useEffect } from 'react';
-import {
-    VictoryBar, VictoryChart, VictoryAxis,
-    VictoryTheme
-} from 'victory';
-import { SlPlus } from "react-icons/sl";
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
 import { Timer } from '../components/Timer';
 import { TimerSetting } from '../components/TimerSetting';
 import SettingsContext from '../components/SettingsContext';
 
-
 export const Dashboard = () => {
     const [groups, setGroups] = useState([]);
-    const location = useLocation();
-    const { name, email, picture } = location.state || {};
-    const userId = 1;
-    useEffect(() => {
-        axios.get(`http://localhost:3001/groups/byUser/${userId}`).then((res) => {
-            setGroups(res.data);
-        })
-    }, []);
+    const [userData, setUserData] = useState({ name: '', email: '', picture: '' });
+    const [userId, setUserId] = useState(null);
     const [showSettings, setShowSettings] = useState(false);
     const [studyMinuites, setStudyMinuites] = useState(45);
     const [breakMinuites, setBreakMinuites] = useState(15);
 
+    let navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        // Check local storage first
+        const storedUserData = localStorage.getItem('userData');
+        if (storedUserData) {
+            const user = JSON.parse(storedUserData);
+            setUserData(user);
+            fetchUserId(user.email);
+        } else if (location.state) {
+            // If not in local storage, use location state and update local storage
+            const { name, email, picture } = location.state;
+            setUserData({ name, email, picture });
+            localStorage.setItem('userData', JSON.stringify({ name, email, picture }));
+            fetchUserId(email);
+        }
+    }, [location.state]);
+
+    const fetchUserId = (email) => {
+        if (email) {
+            axios.get(`http://localhost:3001/users/byEmail/${email}`)
+                .then((res) => {
+                    setUserId(res.data.userId);
+                })
+                .catch(error => console.error('Error fetching userId:', error));
+        }
+    };
+
+    // useEffect(() => {
+    //     if (userId) {
+    //         axios.get(`http://localhost:3001/groups/byUser/${userId}`)
+    //             .then((res) => {
+    //                 setGroups(res.data);
+    //             })
+    //             .catch(error => console.error('Error fetching groups:', error));
+    //     }
+    // }, [userId]);
+
+    useEffect(() => {
+        if (userId) {
+            axios.get(`http://localhost:3001/groupsUsers/byUser/${userId}`)
+                .then((res) => {
+                    setGroups(res.data);
+                })
+                .catch(error => console.error('Error fetching groups:', error));
+        }
+    }, [userId]);
 
     const data = [
         { weekday: 1, hours: 6 },
@@ -38,28 +74,27 @@ export const Dashboard = () => {
         { weekday: 5, hours: 7 },
         { weekday: 6, hours: 4 },
         { weekday: 7, hours: 1 },
-
+        // ... other data
     ];
 
     return (
         <div>
             <div className='navBar'>
                 <NavBar />
-
             </div>
             <div className='profile'>
-                <h1>Hello {name} 👋</h1>
+                <h1>Hello {userData.name} 👋</h1>
                 <div className='profileItem'>
                     <div className='profilePic'>
-                        <img src={picture} alt="user image" />
+                        <img src={userData.picture} alt="user" />
                     </div>
                     <div className='profileText'>
                         <h3>
                             Name:<br />
-                            {name}<br />
+                            {userData.name}<br />
                             <br />
                             Email:<br />
-                            {email}<br />
+                            {userData.email}<br />
                         </h3>
                     </div>
                 </div>
@@ -72,17 +107,16 @@ export const Dashboard = () => {
             </div>
             <div className='myGroup'>
                 <h2>My Groups</h2>
-                <button className='addGroup'><SlPlus /></button>
                 {groups.map((group, key) => {
                     return (
-                        <div className='temp' key={group.id}>
-                            <h3 className='temp' >{group.groupName}</h3>
-                            <div className='temp' >
-                                <p className='temp' >Major: {group.major}</p>
-                                <p className='temp' >Subject: {group.subject}</p>
-                                <p className='temp' >Grade Level: {group.gradeLevel}</p>
-                                <p className='temp' >Leader: {group.leader}</p>
-                            </div>
+                        <div
+                            className='groupContainerBox'
+                            key={group.id}
+                            onClick={() => {
+                                navigate(`/group/${group.id}`)
+                            }}
+                        >
+                            <h3 className='groupbox' >{group.groupName}</h3>
                         </div>
                     );
                 })}
