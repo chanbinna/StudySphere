@@ -1,7 +1,5 @@
 # STUDYSPHERE - Study Group Matching Platform  
 
-[![StudySphere](https://github.com/StudySphereUCSD/StudySphere/blob/main/assets/logo.png)  
-](https://github.com/StudySphereUCSD/StudySphere/blob/main/client/src/Logo1.svg)
 **Description**  
 StudySphere is a web-based platform designed to connect students seeking study groups for collaborative learning. Built with a robust tech stack, the platform features real-time chat, group search, video calls, and personalized group recommendations. Developed during the 2024 LIKELION US Hackathon, it ranked in the **top 10 out of 60+ teams** for its innovative approach to fostering academic collaboration.  
 
